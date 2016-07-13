@@ -1,24 +1,36 @@
 import requests
 
 
-def url_exists(url):
-    # function that checks if a url exists
+class RecommenderError(Exception):
+    '''Base class for exceptions in the recommender module'''
+    pass
+
+
+class URLRetrievalError(RecommenderError):
+    '''Exception raised for errors in the URL input.
+
+    Attributes:
+        expr -- input expression in which the error occurred
+        msg  -- explanation of the error
+    '''
+
+    def __init__(self, expr, msg, e=None):
+        self.expr = expr
+        self.msg = msg
+        self.e = e
+
+
+def get_document(url):
+    # can we get the page?
+    # Is it HTML?
+    # How long is it? Too long, too short (invalid length) or no data?
     try:
         r = requests.head(url)
-    except:
-        return False
-    return True
-
-
-def url_valid(url):
-    # Function that checks the validity of the url
-    r = requests.head(url)
-    return r.status_code == requests.codes.ok
-
-
-def url_html(url):
-    # Function that checks if the url contains html
-    r = requests.get(url)
-    if "text/html" in r.headers["content-type"]:
-        return True
-    return False
+    except requests.exceptions.ConnectionError as e:
+        raise URLRetrievalError(url, 'Could not connect', e)
+    if r.status_code != requests.codes.ok:
+        raise URLRetrievalError(url, 'Invalid response code\
+                                      from remote server')
+    if r.headers["content-type"].split(';')[0] not in ["text/html", "text/plain"]:
+        raise URLRetrievalError(url, 'Document has invalid MIME type: {}'.format(r.headers["content-type"]))
+    return url

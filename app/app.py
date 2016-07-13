@@ -37,12 +37,14 @@ class recommendAPI(Resource):
         # For now, get the argument and run an
         # argument checker on it
         args = self.reqparse.parse_args()
-        return [recommender.url_exists(args.url),
-                recommender.url_valid(args.url),
-                recommender.url_html(args.url)]
+        try:
+            return recommender.get_document(args.url)
+        except recommender.URLRetrievalError:
+            abort(415)
 
 
 api.add_resource(recommendAPI, '/api/recommend/v1.0')
+
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0', debug=True)
