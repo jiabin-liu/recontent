@@ -11,5 +11,8 @@ Using Python3
 
 ## Running the app without Docker
   0. Make sure to use Python3
-  1. Install Flask, you should be able to install it using pip: ```pip install flask```
-  2. Just run ```python app.py```, it should start the app. See steps above to test it.
+  1. Install the following requirements:
+     * Flask, you should be able to install it using pip: ```pip install flask```
+     * flask-restful: ```pip install flask-restful```
+     * requests: ```pip install requests```
+  2. Just run ```python app.py``` from inside the app directory, it should start the app. See steps above to test it.
