@@ -7,19 +7,6 @@ app = Flask(__name__)
 api = Api(app)
 
 
-# For now, let's keep a list of the requested urls here as a dictionary
-# We will want to move this to a presistent database (SQLite?)
-# This is still just test-data
-urls = {
-    'url_id1': {'url':'http://www.symmetrymagazine.org/article/scientists-salvage-insights-from-lost-satellite',
-                'arxiv_recommendation': [('https://arxiv.org/abs/astro-ph/0201381', 0.925),
-                                         ('https://arxiv.org/abs/astro-ph/0201361', 0.880),
-                                         ('https://arxiv.org/abs/astro-ph/0201336', 0.231)
-                                         ]
-                },
-}
-
-
 @app.route('/')
 def index():
     return "Content recommendation rocks!"
@@ -38,8 +25,10 @@ class recommendAPI(Resource):
         # argument checker on it
         args = self.reqparse.parse_args()
         try:
-            return recommender.get_document(args.url)
+            return recommender.quick_recommender(args.url, 'simple-wiki.mm', 'simple-wiki_wordids.txt')
         except recommender.URLRetrievalError:
+            abort(415)
+        except recommender.DocumentParsingError:
             abort(415)
 
 
