@@ -23,7 +23,8 @@ class recommendAPI(Resource):
         self.reqparse.add_argument('url',
                                    type=str,
                                    help='url for document that requires content recommendation')
-        # Prepare the list of available engines
+        # Prepare the list of available engines. This will find all engines
+        # that are imported explicitly
         self.engine_classes = Recommender.__subclasses__()
         super(recommendAPI, self).__init__()
 
