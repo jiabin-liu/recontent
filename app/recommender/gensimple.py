@@ -1,4 +1,4 @@
-from recommender import base
+from recommender.base import Recommender
 import gensim
 import pandas
 from gensim.corpora import Dictionary, HashDictionary, MmCorpus, WikiCorpus
@@ -6,7 +6,7 @@ from gensim.parsing.preprocessing import STOPWORDS
 from gensim.utils import smart_open, simple_preprocess
 
 
-class GenSimple(base.Recommender):
+class GenSimple(Recommender):
     recommender_id = 'gensimple'
 
     def __init__(self, corpus_name):
@@ -25,7 +25,6 @@ class GenSimple(base.Recommender):
         raise NotImplementedError()
 
     def recommendation_for_text(self, text):
-        # process text and return list of IDs of recommended articles
         ''' This function is a quick toy-recommender, to be replaced with
         better things when they are available. The idea is that there
         is already a saved corpus dictionary available, which is passed
@@ -33,7 +32,7 @@ class GenSimple(base.Recommender):
         '''
         bow_vector = self.corpus_dict.doc2bow(tokenize(text))
         # Insert some recommender code here
-        # for now, just return the bow_vector
+        # for now, just return the bow_vector of the text
         return bow_vector
 
 
