@@ -1,7 +1,8 @@
 #!/usr/bin/env python
 from flask import Flask, current_app
 from flask_restful import Resource, Api, abort, reqparse
-import recommender
+import parser
+from recommender import gensimple
 
 app = Flask(__name__)
 api = Api(app)
@@ -25,12 +26,16 @@ class recommendAPI(Resource):
         # argument checker on it
         args = self.reqparse.parse_args()
         try:
-            return recommender.quick_recommender(args.url, 'simple-wiki.mm', 'simple-wiki_wordids.txt')
-        except recommender.URLRetrievalError:
+            text_from_url = parser.get_document(args.url)
+        except parser.URLRetrievalError:
             abort(415)
-        except recommender.DocumentParsingError:
+        except parser.DocumentParsingError:
             abort(415)
-
+        corpus_name = 'simple-wiki'
+        this_recommender = gensimple.GenSimple(corpus_name)
+        recommendation = this_recommender.recommendation_for_text(text_from_url)
+        # This currenly just returns a BOW for the article
+        return recommendation
 
 api.add_resource(recommendAPI, '/api/recommend/v1.0')
 

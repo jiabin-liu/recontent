@@ -1,22 +1,13 @@
-import gensim
-import pandas
 import justext
 import requests
-from gensim.corpora import Dictionary, HashDictionary, MmCorpus, WikiCorpus
-from gensim.parsing.preprocessing import STOPWORDS
-from gensim.utils import smart_open, simple_preprocess
 
 
-def tokenize(text):
-    return [token for token in simple_preprocess(text) if token not in STOPWORDS]
-
-
-class RecommenderError(Exception):
-    '''Base class for exceptions in the recommender module'''
+class ParserError(Exception):
+    '''Base class for exceptions in the parser module'''
     pass
 
 
-class URLRetrievalError(RecommenderError):
+class URLRetrievalError(ParserError):
     '''Exception raised for errors in the URL input.
 
     Attributes:
@@ -31,7 +22,7 @@ class URLRetrievalError(RecommenderError):
         self.e = e
 
 
-class DocumentParsingError(RecommenderError):
+class DocumentParsingError(ParserError):
     '''Exception raised for errors in the parsing of the URL.
 
     Attributes:
@@ -45,7 +36,7 @@ class DocumentParsingError(RecommenderError):
 def get_document(url):
     ''' This function will check if the url is valid and then
     proceed to parse it to produce a clean text (no html) which
-    can be used as input to a recommender algorithm.
+    can be used as input to a recommendation engine.
 
     Arguments:
         url  -- input url that needs to be checked and parsed
@@ -70,18 +61,3 @@ def get_document(url):
     if len(text_only) == 0:
         raise DocumentParsingError('Length of document is zero')
     return text_only
-
-
-def quick_recommender(url, corpusfile, corpusdict):
-    ''' This function is a quick toy-recommender, to be replaced with
-    better things when they are available. The idea is that there is already
-    a saved corpus dictionary available, which is passed on as an argument.
-    The corpusfile is expected to be an mmcorpus
-    '''
-    text = get_document(url)
-    mm_corpus = MmCorpus(corpusfile)
-    corpus_dict = HashDictionary(corpusdict)
-    bow_vector = corpus_dict.doc2bow(tokenize(text))
-    # Insert some recommender code here
-    # for now, just return the bow_vector
-    return bow_vector

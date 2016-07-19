@@ -13,8 +13,7 @@ RUN pip install gensim && \
     pip install --upgrade gensim
 RUN pip install wget
 VOLUME ["/data"]
-COPY app/app.py /
-COPY app/recommender.py /
+COPY app/ app/
 COPY tools/make_simple_wiki_corpus.py /
 WORKDIR /data
-CMD ["sh", "-c", "python /make_simple_wiki_corpus.py && python /app.py"]
+CMD ["sh", "-c", "python /make_simple_wiki_corpus.py && python ../app/app.py"]
