@@ -12,7 +12,7 @@ Using Python3
 
 ## Available corpora
 The available corpora are:
-  1. ```wiki-simple```
+  1. ```wiki-simple```: this currently returns the document ids and scores of the 5 most relevant articles from the simple wikipedia corpus.
 
 ## Adding a recommendation engine
 If you write a new recommendation engine, it needs to inherit from ```Recommender``` base class, see /app/recommender/base.py. The API currently picks a recommendation engine randomly. To register your engine, add the module to the /app/recommender/ directory. Then, explicitly import the class in /app/app.py. This way, the class will be added to the list of subclasses of the Recommender base class.
