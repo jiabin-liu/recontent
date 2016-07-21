@@ -1,9 +1,8 @@
 #!/usr/bin/env python
-import random
-from types import FunctionType
-from flask import Flask, current_app
-from flask_restful import Resource, Api, abort, reqparse
 import parser
+import random
+from flask import Flask, current_app, jsonify
+from flask_restful import Resource, Api, abort, reqparse
 from recommender.base import Recommender
 # Import the recommendation engines here to register them
 from recommender.gensimple import GenSimple
