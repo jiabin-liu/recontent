@@ -14,6 +14,6 @@ RUN pip install gensim && \
 RUN pip install wget
 VOLUME ["/data"]
 COPY app/ app/
-COPY tools/make_simple_wiki_corpus.py /
+COPY tools/get_simple_wiki_corpus.py /
 WORKDIR /data
-CMD ["sh", "-c", "pwd && ls -rlth && python /make_simple_wiki_corpus.py && python ../app/app.py"]
+CMD ["sh", "-c", "pwd && ls -rlth && python /get_simple_wiki_corpus.py && python ../app/app.py"]

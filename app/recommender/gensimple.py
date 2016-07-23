@@ -26,6 +26,7 @@ class GenSimple(Recommender):
         corpusdict = corpus_name + '_wordids.txt'
         lsimodel = corpus_name + '.lsi_model'
         lsiindex = corpus_name + '-lsi.index'
+        self.corpus_name = corpus_name
         self.corpus_mm = MmCorpus(corpusfile)
         self.corpus_dict = Dictionary.load_from_text(corpusdict)
         self.model = LsiModel.load(lsimodel)
@@ -44,18 +45,19 @@ class GenSimple(Recommender):
         vec_lsi = self.model[vec_bow]
         sims = self.index[vec_lsi]
         sims = sorted(enumerate(sims), key=lambda item: -item[1])
-        # FIXME (Freija): I still need to figure out how to go from document ID
-        # to article link. For now, just return the document ids.
-        return jsonify_rec(sims[0:5])
+        return self.jsonify_rec(sims[0:6])
 
-
-def jsonify_rec(recommendation):
-    ''' Helper function to convert the recommendation list
-    to a json document. The scores will be strings as well.
-    '''
-    # We will create a dictionary and then jsonify it.
-    rec_dict = {key: str(value) for key, value in recommendation}
-    return json.dumps(rec_dict)
+    def jsonify_rec(self, recommendation):
+        ''' Helper function to convert the recommendation list
+        to a json document. The scores will be strings as well.
+        '''
+        # grab the dictionary that holds the id-article translation
+        # load from file:
+        article_dict_file = self.corpus_name + '_adict.json'
+        with open(article_dict_file, 'r') as f:
+            article_dict  = json.load(f)
+        rec_dict = {article_dict[str(key)][0]: (str(value), article_dict[str(key)][1]) for key, value in recommendation}
+        return json.dumps(rec_dict)
 
 
 def tokenize(text):

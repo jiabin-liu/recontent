@@ -25,6 +25,7 @@ class recommendAPI(Resource):
         # Prepare the list of available engines. This will find all engines
         # that are imported explicitly
         self.engine_classes = Recommender.__subclasses__()
+        self.recommenders = dict()
         super(recommendAPI, self).__init__()
 
     def get(self, corpus_name):
@@ -38,7 +39,10 @@ class recommendAPI(Resource):
         except parser.DocumentParsingError:
             abort(415)
         # Now, pick a recommendation engine. For now, this is done at random
-        this_recommender = random.choice(self.engine_classes)(corpus_name)
+        random_recommender = random.choice(self.engine_classes)
+        if (random_recommender, corpus_name) not in self.recommenders:
+            self.recommenders[(random_recommender, corpus_name)] = random_recommender(corpus_name)
+        this_recommender = self.recommenders[(random_recommender, corpus_name)]
         recommendation = this_recommender.recommendation_for_text(text_from_url)
         return recommendation
 
