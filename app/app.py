@@ -57,7 +57,7 @@ class recommendAPI(Resource):
             self.recommenders[(random_recommender, corpus_name)] = random_recommender(corpus_name)
         this_recommender = self.recommenders[(random_recommender, corpus_name)]
         recommendation = this_recommender.recommendation_for_text(text_from_url)
-        # write to tracking db and re-write links as /api/click/v1.0/<id>
+        # write to tracking db and re-write links as /api/click/v1.0/<id>/<recommendation_number>
         return recommendation
 
 class ClickTrackingAPI:
@@ -66,7 +66,7 @@ class ClickTrackingAPI:
     # redirect to real URL
 
 api.add_resource(recommendAPI, '/api/recommend/v1.0/<corpus_name>')
-api.add_resource(ClickTrackingAPI, '/api/click/v1.0/<id>/<response_number>')
+api.add_resource(ClickTrackingAPI, '/api/click/v1.0/<id>/<recommendation_number>')
 
 
 if __name__ == "__main__":
