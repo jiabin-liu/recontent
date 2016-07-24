@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 import parser
 import random
-from flask import Flask, current_app, jsonify
+from flask import Flask, current_app, jsonify, request
 from flask_restful import Resource, Api, abort, reqparse
 from recommender.base import Recommender
 # Import the recommendation engines here to register them
@@ -14,6 +14,19 @@ api = Api(app)
 @app.route('/')
 def index():
     return "Content recommendation rocks!"
+
+
+#@app.route('/shutdown')
+#def shutdown():
+#    shutdown_server()
+#    return 'Server shutting down...'
+
+
+#def shutdown_server():
+#    func = request.environ.get('werkzeug.server.shutdown')
+#    if func is None:
+#        raise RuntimeError('Not running with the Werkzeug Server')
+#    func()
 
 
 class recommendAPI(Resource):
