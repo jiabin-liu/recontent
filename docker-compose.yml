@@ -6,5 +6,7 @@ services:
       - "5000:5000"
     volumes:
       - "data:/data"
+    labels:
+      - "traefik.port=5000"
 volumes:
   data:
