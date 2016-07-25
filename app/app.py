@@ -28,9 +28,8 @@ def index():
 #        raise RuntimeError('Not running with the Werkzeug Server')
 #    func()
 
-
 class recommendAPI(Resource):
-    def __init__(self):
+    def __init__(self, recommenders):
         self.reqparse = reqparse.RequestParser()
         self.reqparse.add_argument('url',
                                    type=str,
@@ -38,7 +37,7 @@ class recommendAPI(Resource):
         # Prepare the list of available engines. This will find all engines
         # that are imported explicitly
         self.engine_classes = Recommender.__subclasses__()
-        self.recommenders = dict()
+        self.recommenders = recommenders
         super(recommendAPI, self).__init__()
 
     def get(self, corpus_name):
@@ -59,7 +58,10 @@ class recommendAPI(Resource):
         recommendation = this_recommender.recommendation_for_text(text_from_url)
         return recommendation
 
-api.add_resource(recommendAPI, '/api/recommend/v1.0/<corpus_name>')
+
+recommenders = dict()
+api.add_resource(recommendAPI, '/api/recommend/v1.0/<corpus_name>',
+                 resource_class_args=[recommenders])
 
 
 if __name__ == "__main__":
