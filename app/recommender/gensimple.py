@@ -55,7 +55,7 @@ class GenSimple(Recommender):
         # load from file:
         article_dict_file = self.corpus_name + '_adict.json'
         with open(article_dict_file, 'r') as f:
-            article_dict  = json.load(f)
+            article_dict = json.load(f)
         rec_dict = {article_dict[str(key)][0]: (str(value), article_dict[str(key)][1]) for key, value in recommendation}
         return json.dumps(rec_dict)
 
