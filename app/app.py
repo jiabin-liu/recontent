@@ -21,6 +21,21 @@ def index():
     return flask.render_template("index.html")
 
 
+@app.route('/tryitout')
+def tryitout():
+    return flask.render_template("enterurl.html")
+
+
+@app.route('/documentation')
+def documentation():
+    return flask.render_template("documentation.html")
+
+
+@app.route('/contact')
+def contact():
+    return flask.render_template("contact.html")
+
+
 @app.route('/dashboard')
 def dashboard():
     """
