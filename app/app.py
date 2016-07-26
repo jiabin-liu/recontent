@@ -1,11 +1,16 @@
 #!/usr/bin/env python
 import parser
 import random
+import flask
+import json
+import numpy as np
 from flask import Flask, current_app, jsonify, request
 from flask_restful import Resource, Api, abort, reqparse
 from recommender.base import Recommender
 # Import the recommendation engines here to register them
 from recommender.gensimple import GenSimple
+
+import clickstats
 
 app = Flask(__name__)
 api = Api(app)
@@ -13,20 +18,19 @@ api = Api(app)
 
 @app.route('/')
 def index():
-    return "Content recommendation rocks!"
+    return flask.render_template("index.html")
 
 
-#@app.route('/shutdown')
-#def shutdown():
-#    shutdown_server()
-#    return 'Server shutting down...'
+@app.route('/dashboard')
+def dashboard():
+    """
+    This is the dashboard that displays some interesting
+    stats for our recommendation API service.
+    """
+    data_summary = clickstats.getdatasummary()
+    return flask.render_template("dashboard.html",
+                                 data_summary=data_summary)
 
-
-#def shutdown_server():
-#    func = request.environ.get('werkzeug.server.shutdown')
-#    if func is None:
-#        raise RuntimeError('Not running with the Werkzeug Server')
-#    func()
 
 class recommendAPI(Resource):
     def __init__(self, recommenders):

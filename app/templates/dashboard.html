@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <!--     <meta name="author" content=""> -->
+    <!--     <link rel="shortcut icon" href="../../assets/ico/favicon.ico"> -->
+
+    <title>Dashboard</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="/static/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+</head>
+<body>
+
+<div class="container">
+    <div class="row">
+        <div class="panel panel-default pull-left">
+            <div class="panel-heading">
+                <h3 class="panel-title">Summary:</h3>
+            </div>
+            <div class="panel-body">
+                <p> Average response time: {{ data_summary["average_response_time"] }} </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
