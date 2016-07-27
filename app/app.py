@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+import sys
 import parser
 import random
 import flask
@@ -10,28 +11,29 @@ from recommender.base import Recommender
 # Import the recommendation engines here to register them
 from recommender.gensimple import GenSimple
 import time
-
 import pymongo
 from pymongo import MongoClient
 from bson.objectid import ObjectId
 import recordclicks
-
 import clickstats
 
 app = Flask(__name__)
 api = Api(app)
 
-client = MongoClient()
+client = MongoClient('db')
 db = client.clickdb
 clicks = db.clicks
+
 
 @app.route('/')
 def index():
     return flask.render_template("index.html")
 
+
 @app.route('/tryitout')
 def tryitout():
     return flask.render_template("enterurl.html")
+
 
 @app.route('/tryitout', methods = ['POST'])
 def show_rec():
@@ -110,14 +112,11 @@ class recommendAPI(Resource):
             self.recommenders[(random_recommender, corpus_name)] = random_recommender(corpus_name)
         this_recommender = self.recommenders[(random_recommender, corpus_name)]
         recommendation = this_recommender.recommendation_for_text(text_from_url)
-
         response_time = time.time() - start_time
         recdbdoc = recordclicks.getdbdoc( corpus_name, args.url, response_time, recommendation )
         post_id = clicks.insert_one(recdbdoc).inserted_id
         post_id_str = str(post_id)
-
         recommendation = [( '/api/click/v1.0/' + post_id_str + '/' + str(recommendation.index(item)), item[1], item[2]) for item in recommendation]
-
         return recommendation
 
 

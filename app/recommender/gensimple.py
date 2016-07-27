@@ -45,7 +45,7 @@ class GenSimple(Recommender):
         vec_lsi = self.model[vec_bow]
         sims = self.index[vec_lsi]
         sims = sorted(enumerate(sims), key=lambda item: -item[1])
-        return self.jsonify_rec(sims[0:6])
+        return self.jsonify_rec(sims[0:5])
 
     def jsonify_rec(self, recommendation):
         ''' Helper function to convert the recommendation list
@@ -57,7 +57,7 @@ class GenSimple(Recommender):
         with open(article_dict_file, 'r') as f:
             article_dict = json.load(f)
         rec = [(article_dict[str(key)][0], str(value), article_dict[str(key)][1]) for key, value in recommendation]
-        return json.dumps(rec)
+        return rec
 
 
 def tokenize(text):
