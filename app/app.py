@@ -73,7 +73,7 @@ def redirecturl(source_id, recommendation_number):
 
     #print(source_id)
 
-    newurl = clicks.find_one({'_id':ObjectId(source_id)}).get('response')[int(recommendation_number)][2]
+    newurl = clicks.find_one({'_id':ObjectId(source_id)}).get('response')[int(recommendation_number)][0]
 
     clicks.update({'_id': ObjectId(source_id)}, {'$push': {'clicks' : {'response_id': int(recommendation_number), 'time': time.time()}}})
 

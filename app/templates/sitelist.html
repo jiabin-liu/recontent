@@ -10,9 +10,9 @@
   <ul>
   {% for item in resultdata %}
 
-      <a href="{{ item[2] }}"> {{ item[1] }} </a>
+      <a href="{{ item[0] }}"> {{ item[2] }} </a>
       <br>
-      {{ " score: " + item[3] }}
+      {{ " score: " + item[1] }}
       <br>
   {% endfor %}
   </ul>
