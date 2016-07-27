@@ -1,12 +1,7 @@
 FROM python:3.5
 MAINTAINER Freija Descamps <freija@gmail.com>
 EXPOSE 5000
-RUN pip install flask \
-                flask-restful \
-                requests \
-                justext \
-                gensim \
-                wget
+RUN pip install -r requirements.txt
 VOLUME ["/data"]
 COPY app/ app/
 COPY tools/gensimple/get_simple_wiki_corpus.py /
