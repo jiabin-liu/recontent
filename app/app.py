@@ -4,7 +4,7 @@ import random
 import flask
 import json
 import numpy as np
-from flask import Flask, current_app, jsonify, request, render_template
+from flask import Flask, current_app, jsonify, request, render_template, redirect
 from flask_restful import Resource, Api, abort, reqparse
 from recommender.base import Recommender
 # Import the recommendation engines here to register them
