@@ -8,8 +8,11 @@
   <h1> List of related links: </h1>
 
   <ul>
-  {% for item in data.items() %}
-      <a href="{{ inputid + "n" + item[0] }}"> {{item[1]['title']}} </a>
+  {% for item in resultdata %}
+
+      <a href="{{ item[2] }}"> {{ item[1] }} </a>
+      <br>
+      {{ " score: " + item[3] }}
       <br>
   {% endfor %}
   </ul>
