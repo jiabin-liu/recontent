@@ -39,12 +39,13 @@ def tryitout():
 def show_rec():
 
     inputurl = request.form['inputurl']
+    inputcorpus = request.form['corpus_name']
 
     userecAPI = recommendAPI(recommenders)
     userecAPI.reqparse.remove_argument('url')
     userecAPI.reqparse.add_argument('url', type = str, default = inputurl)
 
-    resultdata = userecAPI.get('speech')
+    resultdata = userecAPI.get(inputcorpus)
 
     return render_template('sitelist.html', resultdata = resultdata)
 
