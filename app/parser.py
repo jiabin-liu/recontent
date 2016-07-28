@@ -42,7 +42,7 @@ def get_document(url):
         url  -- input url that needs to be checked and parsed
     '''
     try:
-        r = requests.head(url)
+        r = requests.head(url, allow_redirects = True)
     except requests.exceptions.ConnectionError as e:
         raise URLRetrievalError(url, 'Could not connect', e)
     if r.status_code != requests.codes.ok:
