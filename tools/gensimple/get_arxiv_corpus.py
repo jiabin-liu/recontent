@@ -4,7 +4,7 @@
 import os
 import wget
 
-URL = 'https://dl.dropboxusercontent.com/u/99220436/recontent-data/arXiv1314/'
+URL = 'https://dl.dropboxusercontent.com/u/99220436/recontent-data/arx/'
 
 CORPUS_NAME = 'arx'
 
