@@ -7,6 +7,7 @@ VOLUME ["/data"]
 COPY app/ app/
 COPY tools/gensimple/get_simple_wiki_corpus.py /
 COPY tools/gensimple/get_speech_corpus.py /
+COPY tools/gensimple/get_arxiv_corpus.py /
 WORKDIR /data
-CMD ["sh", "-c", "python /get_simple_wiki_corpus.py && python /get_speech_corpus.py && python ../app/app.py"]
+CMD ["sh", "-c", "python /get_simple_wiki_corpus.py && python /get_speech_corpus.py && python /get_arxiv_corpus.py && python ../app/app.py"]
 #CMD ["sh", "-c", "python ../app/app.py"]
