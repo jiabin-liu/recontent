@@ -7,27 +7,72 @@
     <meta name="description" content="">
     <!--     <meta name="author" content=""> -->
     <!--     <link rel="shortcut icon" href="../../assets/ico/favicon.ico"> -->
-
-    <title>Dashboard</title>
-
+    <title>Content Recommendation Dashboard</title>
     <!-- Bootstrap core CSS -->
     <link href="/static/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-
 </head>
 <body>
 
-<div class="container">
-    <div class="row">
-        <div class="panel panel-default pull-left">
-            <div class="panel-heading">
-                <h3 class="panel-title">Summary:</h3>
-            </div>
-            <div class="panel-body">
-                <p> Average response time: {{ data_summary["average_response_time"] }} </p>
-            </div>
-        </div>
-    </div>
-</div>
 
+  <div class="container">
+    <!-- Static navbar -->
+    <nav class="navbar navbar-default">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">Content Recommendation</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li><a href="/">Home</a></li>
+            <li><a href="tryitout">Try it out</a></li>
+            <li class="active"><a href="dashboard">API Dashboard</a></li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="documentation">Documentation</a></li>
+            <li><a href="contact">Contact</a></li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div><!--/.container-fluid -->
+    </nav>
+  </div> <!-- /container -->
+
+<div class="container">
+  <div class="container">
+      <div class="row">
+          <div class="panel panel-default pull-left">
+              <div class="panel-heading">
+                  <h3 class="panel-title">All-time summary:</h3>
+              </div>
+              <div class="panel-body">
+                <!-- Table -->
+                <table class="table">
+                  <tr>
+                    <td>Total number of API requests      </td>
+                    <td>{{ data_summary["counter"] }}</td>
+                  </tr>
+                  <tr>
+                    <td>Total number of clicks</td>
+                    <td>{{ data_summary["clickcount"] }}</td>
+                  </tr>
+                  <tr>
+                    <td>Average response time</td>
+                    <td>{{ "{0:0.2f}".format(1000 * data_summary["average_response_time"]) }} ms</td>
+                  </tr>
+                  <tr>
+                    <td>Average click delay</td>
+                    <td>{{ "{0:0.2f}".format(1000 * data_summary["average_click_delay"]) }} ms</td>
+                  </tr>
+                </table>
+              </div>
+          </div>
+      </div>
+  </div>
+</div> <!-- /container -->
 </body>
 </html>

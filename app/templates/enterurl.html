@@ -1,22 +1,62 @@
 <!DOCTYPE html>
 <html lang="en">
+<html lang="en">
 <head>
-    <title>Enter Url</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <!--     <meta name="author" content=""> -->
+    <!--     <link rel="shortcut icon" href="../../assets/ico/favicon.ico"> -->
+    <title>Try it out!</title>
+    <!-- Bootstrap core CSS -->
+    <link href="/static/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
 
-  <h1> Enter url : </h1>
 
-  <form method="post">
+  <div class="container">
+    <!-- Static navbar -->
+    <nav class="navbar navbar-default">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">Content Recommendation</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li><a href="/">Home</a></li>
+            <li class="active"><a href="tryitout">Try it out</a></li>
+            <li><a href="dashboard">API Dashboard</a></li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="documentation">Documentation</a></li>
+            <li><a href="contact">Contact</a></li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div><!--/.container-fluid -->
+    </nav>
+  </div> <!-- /container -->
 
-    <input type="text" name="inputurl">
-    <select name="corpus_name">
-      <option value="simple-wiki">Simple Wiki</option>
-      <option value="speech">Speeches</option>
-    </select>
-    <input type="submit" name="submit">
+<div class="container">
+  <div class="jumbotron">
+    <h2>Enter url</h2>
+    <form method="post">
+      <input type="text" name="inputurl">
+      <select name="corpus_name">
+        <option value="simple-wiki">Simple Wiki</option>
+        <option value="speech">Speeches</option>
+      </select>
+      <input type="submit" name="submit">
+    </form>
+  </div>
+  </div> <!-- /container -->
 
-  </form>
 
 </body>
 </html>
