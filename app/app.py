@@ -41,13 +41,20 @@ def show_rec():
     inputurl = request.form['inputurl']
     inputcorpus = request.form['corpus_name']
 
+    resultdata = urltolist(inputurl, inputcorpus)
+
+    return render_template('sitelist.html', resultdata = resultdata)
+
+
+def urltolist(inputurl, inputcorpus):
+
     userecAPI = recommendAPI(recommenders)
     userecAPI.reqparse.remove_argument('url')
     userecAPI.reqparse.add_argument('url', type = str, default = inputurl)
 
     resultdata = userecAPI.get(inputcorpus)
 
-    return render_template('sitelist.html', resultdata = resultdata)
+    return resultdata
 
 
 @app.route('/documentation')
@@ -69,6 +76,18 @@ def dashboard():
     data_summary = clickstats.getdatasummary()
     return flask.render_template("dashboard.html",
                                  data_summary=data_summary)
+
+
+@app.route('/api/click/v1.0/<source_id>/<recommendation_number>/sim')
+def creep(source_id, recommendation_number):
+
+    newurl = clicks.find_one({'_id':ObjectId(source_id)}).get('response')[int(recommendation_number)][0]
+
+    newcorpus = clicks.find_one({'_id':ObjectId(source_id)}).get('corpus')
+
+    resultdata = urltolist(newurl, newcorpus)
+
+    return render_template('sitelist.html', resultdata = resultdata)
 
 
 @app.route('/api/click/v1.0/<source_id>/<recommendation_number>')

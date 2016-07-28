@@ -29,12 +29,12 @@
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
             <li><a href="/">Home</a></li>
-            <li class="active"><a href="tryitout">Try it out</a></li>
-            <li><a href="dashboard">API Dashboard</a></li>
+            <li class="active"><a href="/tryitout">Try it out</a></li>
+            <li><a href="/dashboard">API Dashboard</a></li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
-            <li><a href="documentation">Documentation</a></li>
-            <li><a href="contact">Contact</a></li>
+            <li><a href="/documentation">Documentation</a></li>
+            <li><a href="/contact">Contact</a></li>
           </ul>
         </div><!--/.nav-collapse -->
       </div><!--/.container-fluid -->
@@ -49,7 +49,7 @@
       {% for item in resultdata %}
           <a href="{{ item[0] }}"> {{ item[2] }} </a>
           <br>
-          {{ " score: " + item[1] }}
+          {{ " score: " + item[1] }} <a href = "{{  item[0] ~ "/sim"}}"> (see similar) </a>
           <br>
       {% endfor %}
       </ul>
