@@ -9,6 +9,7 @@ services:
       - "5000:5000"
     volumes:
       - "corpora:/data"
+#      - "./app/static:/app/static"
     labels:
       - "traefik.port=5000"
   db:

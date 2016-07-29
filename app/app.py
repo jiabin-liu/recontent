@@ -103,6 +103,11 @@ def redirecturl(source_id, recommendation_number):
     return redirect(newurl)
 
 
+@app.route('/data/alltime')
+def getalltimedata():
+    return clickstats.getalldata()
+
+
 class recommendAPI(Resource):
     def __init__(self, recommenders):
         self.reqparse = reqparse.RequestParser()
@@ -143,7 +148,6 @@ class recommendAPI(Resource):
 recommenders = dict()
 api.add_resource(recommendAPI, '/api/recommend/v1.0/<corpus_name>',
                  resource_class_args=[recommenders])
-
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0', debug=True)

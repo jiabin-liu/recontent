@@ -44,7 +44,7 @@ def main(argv=None):
     i = 0
     article_dict = {}
     for text in wiki.get_texts(meta=True):
-        url_string = 'simple.wikipedia.org/wiki/?curid={}'
+        url_string = 'https://simple.wikipedia.org/wiki/?curid={}'
         article_dict[i] = (url_string.format(text[0]), text[1])
         i += 1
     with open(ARTICLEDICT, 'w') as f:

@@ -12,9 +12,11 @@ from gensim.models import TfidfModel, LsiModel
 from gensim.parsing.preprocessing import STOPWORDS
 from gensim import similarities
 
+# Fill in here where to get the files
+RAWFILE = '../../data/speechtext.json'
+RAWIDS = '../../data/speechurl.json'
 
-RAWFILE = '../data/speechtext.json'
-RAWIDS = '../data/speechurl.json'
+# These are the names of the output files
 MMFILE = 'speech.mm'
 DICTFILE = 'speech_wordids.txt'
 TDIFFILE = 'speech_tfidf.mm'
