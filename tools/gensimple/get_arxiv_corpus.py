@@ -13,6 +13,7 @@ DICTFILE = CORPUS_NAME + '_wordids.txt'
 SIMMATRIX = CORPUS_NAME + '-lsi.index'
 LSIMODEL = CORPUS_NAME + '.lsi_model'
 LSIPROJ = CORPUS_NAME + '.lsi_model.projection'
+LSIPROJNPY=CORPUS_NAME + '.lsi_model.projection.u.npy'
 ARTICLEDICT = CORPUS_NAME + '_adict.json'
 NPYINDEX = CORPUS_NAME + '-lsi.index.index.npy'
 
@@ -29,6 +30,7 @@ def main(argv=None):
         os.remove(ARTICLEDICT)
         os.remove(LSIPROJ)
         os.remove(NPYINDEX)
+        os.remove(LSIPROJNPY)
     except OSError:
         pass
 
@@ -39,6 +41,8 @@ def main(argv=None):
     wget.download(URL + ARTICLEDICT)
     wget.download(URL + LSIPROJ)
     wget.download(URL + NPYINDEX)
+    wget.download(URL + LSIPROJNPY)
+    
 
 if __name__ == "__main__":
     main()
