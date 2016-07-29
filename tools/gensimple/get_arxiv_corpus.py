@@ -9,6 +9,7 @@ URL = 'https://dl.dropboxusercontent.com/u/99220436/recontent-data/arx/'
 CORPUS_NAME = 'arx1501'
 
 MMFILE = CORPUS_NAME + '.mm'
+MMIND=CORPUS_NAME + '.mm.index'
 DICTFILE = CORPUS_NAME + '_wordids.txt'
 SIMMATRIX = CORPUS_NAME + '-lsi.index'
 LSIMODEL = CORPUS_NAME + '.lsi_model'
@@ -29,6 +30,7 @@ def main(argv=None):
         os.remove(LSIMODEL)
         os.remove(ARTICLEDICT)
         os.remove(LSIPROJ)
+        os.remove(MMIND)
         #os.remove(NPYINDEX)
         #os.remove(LSIPROJNPY)
     except OSError:
@@ -40,6 +42,7 @@ def main(argv=None):
     wget.download(URL + LSIMODEL)
     wget.download(URL + ARTICLEDICT)
     wget.download(URL + LSIPROJ)
+    wget.download(URL + MMIND)
     #wget.download(URL + NPYINDEX)
     #wget.download(URL + LSIPROJNPY)
     
