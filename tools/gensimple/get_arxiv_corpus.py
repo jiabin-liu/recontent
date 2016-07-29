@@ -15,7 +15,7 @@ LSIMODEL = CORPUS_NAME + '.lsi_model'
 LSIPROJ = CORPUS_NAME + '.lsi_model.projection'
 #LSIPROJNPY=CORPUS_NAME + '.lsi_model.projection.u.npy'
 ARTICLEDICT = CORPUS_NAME + '_adict.json'
-NPYINDEX = CORPUS_NAME + '-lsi.index.index.npy'
+#NPYINDEX = CORPUS_NAME + '-lsi.index.index.npy'
 
 DEFAULT_DICT_SIZE = 100000
 
@@ -29,8 +29,8 @@ def main(argv=None):
         os.remove(LSIMODEL)
         os.remove(ARTICLEDICT)
         os.remove(LSIPROJ)
-        os.remove(NPYINDEX)
-        os.remove(LSIPROJNPY)
+        #os.remove(NPYINDEX)
+        #os.remove(LSIPROJNPY)
     except OSError:
         pass
 
@@ -40,7 +40,7 @@ def main(argv=None):
     wget.download(URL + LSIMODEL)
     wget.download(URL + ARTICLEDICT)
     wget.download(URL + LSIPROJ)
-    wget.download(URL + NPYINDEX)
+    #wget.download(URL + NPYINDEX)
     #wget.download(URL + LSIPROJNPY)
     
 
