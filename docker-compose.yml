@@ -10,6 +10,7 @@ services:
     volumes:
       - "corpora:/data"
 #      - "./app/static:/app/static"
+#      - "./app/templates:/app/templates"
     labels:
       - "traefik.port=5000"
   db:

@@ -39,10 +39,6 @@
               <li><a href="tryitout">Try it out</a></li>
               <li><a href="dashboard">API Dashboard</a></li>
             </ul>
-            <ul class="nav navbar-nav navbar-right">
-              <li><a href="documentation">Documentation</a></li>
-              <li><a href="contact">Contact</a></li>
-            </ul>
           </div><!--/.nav-collapse -->
         </div><!--/.container-fluid -->
       </nav>
@@ -50,12 +46,55 @@
       <!-- Main component for a primary marketing message or call to action -->
       <div class="jumbotron">
         <h1>Content Recommendation API</h1>
-        <p>This Content Recommendation API was developed by F D, F K Y and J L
-          during the <a href='http://cdips.physics.berkeley.edu/2016-cdips-data-science-workshop/'>2016 CDIPS Data Science workshop.</a>  F C was the mentor for the team.
+        <p>This Content Recommendation API was developed by Freija Descamps, Kuan Ying Fang and J. L.
+          during the <a href='http://cdips.physics.berkeley.edu/2016-cdips-data-science-workshop/'>2016 CDIPS Data Science workshop.</a>  Frank Cleary was the mentor for the team.
           The goal of the project was to design a recommendation API framework that can handle multiple corpora and uses different recommendation engines. </p>
         <p>
           <a class="btn btn-lg btn-primary" href="tryitout" role="button">Try it out!</a>
         </p>
+      </div>
+      <div class="jumbotron">
+        <h1>API Usage</h1>
+
+        <p>The application has one endpoints:</p>
+
+        <h3><code>GET /api/recommend/v1.0/&lt;corpusname&gt;</code></h3>
+
+        <blockquote>
+        <p><p>Provide a <code>corpus_name</code> as part of the GET request. Currently the options are: speech, simple-wiki and arx1501.</p>
+        <p>Responds with a list containing 5 recommendations. It supplies a redirect URL, score and title for each one</p>
+        <p>Example:</p>
+        <pre><code>$ curl &#39;https://recommender.website/api/recommend/v1.0/speech&#39; -X GET -d &#39;url=http://www.people.com/article/melania-trump-michelle-obama-similar-convention-speeches&#39;
+        Response:
+        [
+          [
+            "/api/click/v1.0/579d0a03ea44ff00101fd05e/0",
+            "0.651696",
+            "American Rhetoric: Hillary Clinton - Address Announcing Suspension of \r\nCampaign for the U.S. Presidency"
+          ],
+          [
+            "/api/click/v1.0/579d0a03ea44ff00101fd05e/1",
+            "0.616036",
+            "American Rhetoric: Hillary Clinton - 2008 Democratic National Convention \r\nKeynote Address"
+          ],
+          [
+            "/api/click/v1.0/579d0a03ea44ff00101fd05e/2",
+            "0.599183",
+            "American Rhetoric: John Kerry -- Acceptance Address at the 2004 \r\nDemocratic National Convention Address"
+          ],
+          [
+            "/api/click/v1.0/579d0a03ea44ff00101fd05e/3",
+            "0.569011",
+            "American Rhetoric: Mitt Romney -- Republican Party Presidential \r\nNomination Acceptance Speech (transcript-audio-video)"
+          ],
+          [
+            "/api/click/v1.0/579d0a03ea44ff00101fd05e/4",
+            "0.568064",
+            "American Rhetoric: William Jeffersonl Clinton - 1992 Democratic \r\nPresidential Nomination Acceptance Address"
+          ]
+        ]
+        </code></pre>
+        </blockquote>
       </div>
 
     </div> <!-- /container -->
