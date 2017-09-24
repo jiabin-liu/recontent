@@ -1,5 +1,10 @@
 # recontent
+Data science project completed in summer 2016 at UC Berkeley CDIPS workshop
+Team Member: Freija Descamps, Jiabin Liu, and Kuan-Ying Fang
+
 Content recommendation API
+
+
 Using Python3
 
 
